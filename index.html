@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafoglio Data Science | Tommaso Manganiello</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --tag-bg: #e2e8f0;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .tag {
+            background-color: var(--tag-bg);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .card-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--tag-bg);
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- INTESTAZIONE -->
+        <header>
+            <h1>Tommaso Manganiello</h1>
+            <p>Data Science Student</p>
+            <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+                Different analisis, for different interest.
+            </p>
+            <div class="social-links">
+                <a href="https://github.com/tuo-username" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/tuo-profilo" target="_blank">www.linkedin.com/in/tommaso-manganiello</a>
+                <a href="mailto:tua-email@email.com">tmanganiello03@gmail.com</a>
+            </div>
+        </header>
+
+        <!-- SEZIONE PROGETTI -->
+        <main>
+            <section>
+                <h2>I Miei Progetti</h2>
+                <div class="projects-grid">
+
+                    <!-- PROGETTO 1 (Esempio Web App) -->
+                    <div class="card">
+                        <div>
+                            <h3>Analisi Esplorativa & Web App</h3>
+                            <p>Web app interattiva creata per esplorare un dataset di prova e mostrare le metriche principali in tempo reale.</p>
+                            <div class="tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Streamlit</span>
+                                <span class="tag">Pandas</span>
+                            </div>
+                        </div>
+                        <div class="card-links">
+                            <a href="https://tuo-app.streamlit.app" target="_blank" class="btn btn-primary">https://tmanganiello-code.github.io/monitoraggio-portafoglio-personalizzato/</a>
+                            <a href="https://github.com/tuo-username/nome-repo-progetto" target="_blank" class="btn btn-secondary">Codice</a>
+                        </div>
+                    </div>
+
+                    <!-- PROGETTO 2 (In lavorazione) -->
+                    <div class="card">
+                        <div>
+                            <h3>Progetto di Machine Learning</h3>
+                            <p>Analisi di classificazione per la predizione dei dati. Attualmente in fase di affinamento dei modelli.</p>
+                            <div class="tags">
+                                <span class="tag">Scikit-Learn</span>
+                                <span class="tag">EDA</span>
+                                <span class="tag">In Corso</span>
+                            </div>
+                        </div>
+                        <div class="card-links">
+                            <a href="https://github.com/tuo-username/nome-repo-progetto2" target="_blank" class="btn btn-secondary">Vedi Repository</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>© 2026 Tommaso Manganiello - Realizzato con GitHub Pages</p>
+        </footer>
+    </div>
+
+</body>
+</html>
