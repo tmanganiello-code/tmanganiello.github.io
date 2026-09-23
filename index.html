@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafoglio Data Science | Tommaso Manganiello</title>
     <style>
+        /* Palette colori */
         :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --tag-bg: #e2e8f0;
-            --border: #e2e8f0;
+            --bg-color: #0D1B2A;       /* Blu scurissimo per lo sfondo */
+            --card-bg: #1B263B;        /* Blu scuro per le card */
+            --border: #415A77;         /* Blu medio per bordi */
+            --tag-bg: #415A77;         /* Blu medio per i tag */
+            --accent: #778D7A;         /* Verde salvia per accenti e bottoni primari */
+            --accent-hover: #415A77;   /* Blu per l'hover dei bottoni */
+            --text-muted: #D4C4A8;     /* Beige per i testi secondari */
+            --text-main: #F4F1DE;      /* Crema chiaro per i testi principali */
         }
-
+        
         * {
             box-sizing: border-box;
             margin: 0;
@@ -35,114 +36,182 @@
             margin: 0 auto;
         }
 
+        /* --- HEADER E PRESENTAZIONE --- */
         header {
             margin-bottom: 3rem;
-            padding-bottom: 1.5rem;
+            padding-bottom: 2rem;
             border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            flex-shrink: 0;
         }
 
-        header p {
+        .header-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-main);
+        }
+
+        .header-text h2 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .header-text p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
         }
 
         .social-links {
-            margin-top: 1rem;
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
+            flex-wrap: wrap;
         }
 
         .social-links a {
-            color: var(--accent);
+            color: var(--text-main);
+            background-color: var(--card-bg);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            text-decoration: underline;
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-color);
         }
 
-        section h2 {
-            font-size: 1.5rem;
+        /* --- SEZIONE PROGETTI E FILTRI --- */
+        .section-title {
+            font-size: 1.8rem;
             margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-color);
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card.hidden {
+            display: none;
         }
 
         .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-color: var(--accent);
         }
 
         .card h3 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
+            color: var(--text-main);
         }
 
         .card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
         .tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
         }
 
         .tag {
             background-color: var(--tag-bg);
-            color: var(--text-muted);
+            color: var(--text-main);
             font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
             font-weight: 500;
         }
 
         .card-links {
             display: flex;
-            gap: 0.8rem;
+            gap: 1rem;
             margin-top: auto;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.4rem 0.8rem;
-            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
+            text-align: center;
+            flex: 1;
+            transition: background-color 0.3s;
         }
 
         .btn-primary {
             background-color: var(--accent);
-            color: white;
+            color: var(--bg-color);
         }
 
         .btn-primary:hover {
             background-color: var(--accent-hover);
+            color: var(--text-main);
         }
 
         .btn-secondary {
@@ -159,37 +228,63 @@
             margin-top: 4rem;
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             padding-top: 2rem;
             border-top: 1px solid var(--border);
+        }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .social-links {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- INTESTAZIONE -->
+        
+        <!-- HEADER -->
         <header>
-            <h1>Tommaso Manganiello</h1>
-            <p>Data Science Student</p>
-            <p style="margin-top: 0.5rem; font-size: 0.95rem;">
-                Different analisis, for different interest.
-            </p>
-            <div class="social-links">
-                <a href="https://github.com/tuo-username" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/tuo-profilo" target="_blank">www.linkedin.com/in/tommaso-manganiello</a>
-                <a href="mailto:tua-email@email.com">tmanganiello03@gmail.com</a>
+            <!-- Inserisci qui il nome del file della tua foto -->
+            <img src="foto-profilo.jpg" alt="Foto Profilo Tommaso Manganiello" class="profile-pic">
+            
+            <div class="header-text">
+                <h1>Tommaso Manganiello</h1>
+                <h2>Data Science Student & Aspiring Data Analyst</h2>
+                <p>Esploro dati, creo modelli di machine learning e sviluppo web app interattive per trasformare dati grezzi in insight utili.</p>
+                
+                <div class="social-links">
+                    <a href="https://github.com/tuo-username" target="_blank">GitHub</a>
+                    <a href="https://linkedin.com/in/tuo-profilo" target="_blank">LinkedIn</a>
+                    <a href="mailto:tua-email@email.com">Contattami</a>
+                </div>
             </div>
         </header>
 
-        <!-- SEZIONE PROGETTI -->
+        <!-- MAIN & PROGETTI -->
         <main>
             <section>
-                <h2>I Miei Progetti</h2>
-                <div class="projects-grid">
+                <h2 class="section-title">I Miei Progetti</h2>
+                
+                <!-- FILTRI PROGETTI -->
+                <div class="filter-container">
+                    <button class="filter-btn active" data-filter="all">Tutti</button>
+                    <button class="filter-btn" data-filter="python">Python</button>
+                    <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
+                    <button class="filter-btn" data-filter="webapp">Web App</button>
+                </div>
 
-                    <!-- PROGETTO 1 (Esempio Web App) -->
-                    <div class="card">
+                <div class="projects-grid">
+                    
+                    <!-- PROGETTO 1 (Nota il data-tags per i filtri) -->
+                    <div class="card" data-tags="python webapp">
                         <div>
                             <h3>Analisi Esplorativa & Web App</h3>
                             <p>Web app interattiva creata per esplorare un dataset di prova e mostrare le metriche principali in tempo reale.</p>
@@ -200,24 +295,40 @@
                             </div>
                         </div>
                         <div class="card-links">
-                            <a href="https://tmanganiello-code.github.io/monitoraggio-portafoglio-personalizzato/" target="_blank" class="btn btn-primary">Web App</a>
-                            <a href="https://github.com/tuo-username/nome-repo-progetto" target="_blank" class="btn btn-secondary">Codice</a>
+                            <a href="#" target="_blank" class="btn btn-primary">Apri App</a>
+                            <a href="#" target="_blank" class="btn btn-secondary">Codice GitHub</a>
                         </div>
                     </div>
 
-                    <!-- PROGETTO 2 (In lavorazione) -->
-                    <div class="card">
+                    <!-- PROGETTO 2 -->
+                    <div class="card" data-tags="python machine-learning">
                         <div>
-                            <h3>Progetto di Machine Learning</h3>
-                            <p>Analisi di classificazione per la predizione dei dati. Attualmente in fase di affinamento dei modelli.</p>
+                            <h3>Modello Predittivo ML</h3>
+                            <p>Analisi di classificazione per la predizione dei dati tramite algoritmi Random Forest e Regressione Logistica.</p>
                             <div class="tags">
+                                <span class="tag">Python</span>
                                 <span class="tag">Scikit-Learn</span>
                                 <span class="tag">EDA</span>
-                                <span class="tag">In Corso</span>
                             </div>
                         </div>
                         <div class="card-links">
-                            <a href="https://github.com/tuo-username/nome-repo-progetto2" target="_blank" class="btn btn-secondary">Vedi Repository</a>
+                            <a href="#" target="_blank" class="btn btn-secondary">Vedi Repository</a>
+                        </div>
+                    </div>
+
+                    <!-- PROGETTO 3 (Esempio aggiuntivo) -->
+                    <div class="card" data-tags="machine-learning">
+                        <div>
+                            <h3>Analisi del Sentiment</h3>
+                            <p>Progetto NLP per analizzare il sentimento delle recensioni degli utenti estratti da un e-commerce.</p>
+                            <div class="tags">
+                                <span class="tag">NLP</span>
+                                <span class="tag">NLTK</span>
+                                <span class="tag">Machine Learning</span>
+                            </div>
+                        </div>
+                        <div class="card-links">
+                            <a href="#" target="_blank" class="btn btn-secondary">Vedi Repository</a>
                         </div>
                     </div>
 
@@ -227,9 +338,36 @@
 
         <!-- FOOTER -->
         <footer>
-            <p>© 2026 Tommaso Manganiello - Realizzato con GitHub Pages</p>
+            <p>© 2026 Tommaso Manganiello - Realizzato con HTML, CSS & JS</p>
         </footer>
     </div>
 
+    <!-- SCRIPT PER IL FILTRAGGIO DEI PROGETTI -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Rimuove la classe attiva da tutti i bottoni e la aggiunge a quello cliccato
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // Mostra o nasconde i progetti in base al tag
+                    projectCards.forEach(card => {
+                        const tags = card.getAttribute('data-tags');
+                        if (filterValue === 'all' || tags.includes(filterValue)) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
