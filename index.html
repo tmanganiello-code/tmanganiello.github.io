@@ -4,365 +4,227 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafoglio Data Science | Tommaso Manganiello</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-bg': '#F4F1DE',       /* Lightest - Sfondo principale */
+                        'brand-beige': '#D4C4A8',    /* Beige - Bordi e background secondari */
+                        'brand-sage': '#778D7A',     /* Verde Salvia - Tag e Highlight */
+                        'brand-blue': '#415A77',     /* Blu Medio - Filtri e Accenti secondari */
+                        'brand-dark': '#1B263B',     /* Blu Scuro - Intestazioni */
+                        'brand-black': '#0D1B2A',    /* Blu Scurissimo - Testi principali e Bottoni primari */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Palette colori */
-        :root {
-            --bg-color: #0D1B2A;       /* Blu scurissimo per lo sfondo */
-            --card-bg: #1B263B;        /* Blu scuro per le card */
-            --border: #415A77;         /* Blu medio per bordi */
-            --tag-bg: #415A77;         /* Blu medio per i tag */
-            --accent: #778D7A;         /* Verde salvia per accenti e bottoni primari */
-            --accent-hover: #415A77;   /* Blu per l'hover dei bottoni */
-            --text-muted: #D4C4A8;     /* Beige per i testi secondari */
-            --text-main: #F4F1DE;      /* Crema chiaro per i testi principali */
+        /* Aggiungiamo transizioni fluide per il filtraggio della griglia */
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: scale(1);
         }
         
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        .project-card.hidden-card {
+            opacity: 0;
+            transform: scale(0.9);
+            position: absolute;
+            pointer-events: none;
+            visibility: hidden;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* --- HEADER E PRESENTAZIONE --- */
-        header {
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .profile-pic {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--accent);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            flex-shrink: 0;
-        }
-
-        .header-text h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.3rem;
-            color: var(--text-main);
-        }
-
-        .header-text h2 {
-            color: var(--accent);
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            font-weight: 500;
-        }
-
-        .header-text p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.2rem;
-            flex-wrap: wrap;
-        }
-
-        .social-links a {
-            color: var(--text-main);
-            background-color: var(--card-bg);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            border-color: var(--accent);
-            color: var(--bg-color);
-        }
-
-        /* --- SEZIONE PROGETTI E FILTRI --- */
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background-color: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            padding: 0.4rem 1.2rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background-color: var(--accent);
-            border-color: var(--accent);
-            color: var(--bg-color);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card.hidden {
+        /* Nascondiamo la scrollbar per una visualizzazione più pulita dei filtri su mobile */
+        .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            border-color: var(--accent);
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tag {
-            background-color: var(--tag-bg);
-            color: var(--text-main);
-            font-size: 0.75rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            font-weight: 500;
-        }
-
-        .card-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: auto;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-align: center;
-            flex: 1;
-            transition: background-color 0.3s;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: var(--bg-color);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-            color: var(--text-main);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--tag-bg);
-        }
-
-        footer {
-            margin-top: 4rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-
-        /* --- RESPONSIVE MOBILE --- */
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-                gap: 1.5rem;
-            }
-            .social-links {
-                justify-content: center;
-            }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body>
+<body class="bg-brand-bg text-brand-black font-sans antialiased min-h-screen selection:bg-brand-sage selection:text-white">
 
-    <div class="container">
+    <div class="max-w-5xl mx-auto px-6 py-12 md:py-20">
         
         <!-- HEADER -->
-        <header>
-            <!-- Inserisci qui il nome del file della tua foto -->
-            <img src="foto_profilo.png" alt="Foto Profilo Tommaso Manganiello" class="profile-pic">
+        <header class="flex flex-col md:flex-row items-center md:items-start gap-8 mb-16 pb-12 border-b-2 border-brand-beige/50">
+            <!-- Foto Profilo (con fallback se l'immagine locale non esiste) -->
+            <img src="foto-profilo.jpg" 
+                 onerror="this.src='https://placehold.co/400x400/1B263B/F4F1DE?text=TM'" 
+                 alt="Foto Profilo Tommaso Manganiello" 
+                 class="w-36 h-36 md:w-48 md:h-48 rounded-full object-cover border-4 border-brand-sage shadow-xl flex-shrink-0 transition-transform duration-300 hover:scale-105">
             
-            <div class="header-text">
-                <h1>Tommaso Manganiello</h1>
-                <h2>Data Science Student & Aspiring Data Analyst</h2>
-                <p>Esploro dati, creo modelli di machine learning e sviluppo web app interattive per trasformare dati grezzi in insight utili.</p>
+            <div class="text-center md:text-left flex flex-col justify-center h-full">
+                <h1 class="text-4xl md:text-5xl font-bold text-brand-dark mb-2 tracking-tight">Tommaso Manganiello</h1>
+                <h2 class="text-xl md:text-2xl font-medium text-brand-blue mb-4">Data Science Student & Aspiring Data Analyst</h2>
+                <p class="text-lg text-brand-black/80 leading-relaxed mb-8 max-w-2xl">
+                    Esploro dati, creo modelli di machine learning e sviluppo web app interattive per trasformare dati grezzi in insight utili. Appassionato di problem solving e visualizzazione dati.
+                </p>
                 
-                <div class="social-links">
-                    <a href="https://github.com/tuo-username" target="_blank">GitHub</a>
-                    <a href="https://linkedin.com/in/tuo-profilo" target="_blank">LinkedIn</a>
-                    <a href="mailto:tua-email@email.com">Contattami</a>
+                <!-- Social Links -->
+                <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                    <a href="https://github.com/tuo-username" target="_blank" class="px-6 py-2.5 rounded-full bg-brand-black text-brand-bg font-semibold text-sm hover:bg-brand-blue hover:-translate-y-1 transition-all duration-300 shadow-md">
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/tuo-profilo" target="_blank" class="px-6 py-2.5 rounded-full bg-brand-black text-brand-bg font-semibold text-sm hover:bg-brand-blue hover:-translate-y-1 transition-all duration-300 shadow-md">
+                        LinkedIn
+                    </a>
+                    <a href="mailto:tua-email@email.com" class="px-6 py-2.5 rounded-full border-2 border-brand-black text-brand-black font-semibold text-sm hover:bg-brand-black hover:text-brand-bg hover:-translate-y-1 transition-all duration-300">
+                        Contattami
+                    </a>
                 </div>
             </div>
         </header>
 
-        <!-- MAIN & PROGETTI -->
         <main>
             <section>
-                <h2 class="section-title">I Miei Progetti</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark text-center mb-10 tracking-tight">I Miei Progetti</h2>
                 
                 <!-- FILTRI PROGETTI -->
-                <div class="filter-container">
-                    <button class="filter-btn active" data-filter="all">Tutti</button>
-                    <button class="filter-btn" data-filter="python">Python</button>
-                    <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
-                    <button class="filter-btn" data-filter="webapp">Web App</button>
+                <div class="flex overflow-x-auto no-scrollbar justify-start md:justify-center gap-3 mb-12 pb-2">
+                    <button class="filter-btn active px-5 py-2 rounded-full border-2 border-brand-blue font-semibold text-sm transition-all duration-300 bg-brand-blue text-brand-bg whitespace-nowrap" data-filter="all">Tutti</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border-2 border-brand-blue text-brand-blue font-semibold text-sm transition-all duration-300 hover:bg-brand-blue/10 whitespace-nowrap" data-filter="python">Python</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border-2 border-brand-blue text-brand-blue font-semibold text-sm transition-all duration-300 hover:bg-brand-blue/10 whitespace-nowrap" data-filter="machine-learning">Machine Learning</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border-2 border-brand-blue text-brand-blue font-semibold text-sm transition-all duration-300 hover:bg-brand-blue/10 whitespace-nowrap" data-filter="webapp">Web App</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border-2 border-brand-blue text-brand-blue font-semibold text-sm transition-all duration-300 hover:bg-brand-blue/10 whitespace-nowrap" data-filter="nlp">NLP</button>
                 </div>
 
-                <div class="projects-grid">
+                <!-- GRIGLIA PROGETTI -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative" id="projects-grid">
                     
-                    <!-- PROGETTO 1 (Nota il data-tags per i filtri) -->
-                    <div class="card" data-tags="python webapp">
-                        <div>
-                            <h3>Analisi Esplorativa & Web App</h3>
-                            <p>Web app interattiva creata per esplorare un dataset di prova e mostrare le metriche principali in tempo reale.</p>
-                            <div class="tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">Streamlit</span>
-                                <span class="tag">Pandas</span>
+                    <!-- PROGETTO 1 -->
+                    <article class="project-card bg-white rounded-2xl p-6 border-2 border-brand-beige flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage relative z-10" data-tags="python webapp">
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Analisi Esplorativa & Web App</h3>
+                            <p class="text-brand-black/70 text-sm mb-6 leading-relaxed">
+                                Web app interattiva creata per esplorare un dataset di prova e mostrare le metriche principali in tempo reale, permettendo all'utente di filtrare dinamicamente i parametri.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Python</span>
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Streamlit</span>
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Pandas</span>
                             </div>
                         </div>
-                        <div class="card-links">
-                            <a href="#" target="_blank" class="btn btn-primary">Apri App</a>
-                            <a href="#" target="_blank" class="btn btn-secondary">Codice GitHub</a>
+                        <div class="flex flex-col sm:flex-row gap-3 mt-auto">
+                            <a href="#" class="flex-1 text-center bg-brand-black text-brand-bg font-medium py-2 rounded-lg text-sm hover:bg-brand-blue transition-colors">Apri App</a>
+                            <a href="#" class="flex-1 text-center border-2 border-brand-black text-brand-black font-medium py-2 rounded-lg text-sm hover:bg-brand-beige transition-colors">Codice GitHub</a>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- PROGETTO 2 -->
-                    <div class="card" data-tags="python machine-learning">
-                        <div>
-                            <h3>Modello Predittivo ML</h3>
-                            <p>Analisi di classificazione per la predizione dei dati tramite algoritmi Random Forest e Regressione Logistica.</p>
-                            <div class="tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">Scikit-Learn</span>
-                                <span class="tag">EDA</span>
+                    <article class="project-card bg-white rounded-2xl p-6 border-2 border-brand-beige flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage relative z-10" data-tags="python machine-learning">
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Modello Predittivo ML</h3>
+                            <p class="text-brand-black/70 text-sm mb-6 leading-relaxed">
+                                Analisi di classificazione per la predizione dei dati di churn aziendale tramite algoritmi Random Forest e Regressione Logistica, ottimizzando gli iperparametri.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Python</span>
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Scikit-Learn</span>
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">EDA</span>
                             </div>
                         </div>
-                        <div class="card-links">
-                            <a href="#" target="_blank" class="btn btn-secondary">Vedi Repository</a>
+                        <div class="flex flex-col sm:flex-row gap-3 mt-auto">
+                            <a href="#" class="w-full text-center border-2 border-brand-black text-brand-black font-medium py-2 rounded-lg text-sm hover:bg-brand-beige transition-colors">Vedi Repository</a>
                         </div>
-                    </div>
+                    </article>
 
-                    <!-- PROGETTO 3 (Esempio aggiuntivo) -->
-                    <div class="card" data-tags="machine-learning">
-                        <div>
-                            <h3>Analisi del Sentiment</h3>
-                            <p>Progetto NLP per analizzare il sentimento delle recensioni degli utenti estratti da un e-commerce.</p>
-                            <div class="tags">
-                                <span class="tag">NLP</span>
-                                <span class="tag">NLTK</span>
-                                <span class="tag">Machine Learning</span>
+                    <!-- PROGETTO 3 -->
+                    <article class="project-card bg-white rounded-2xl p-6 border-2 border-brand-beige flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage relative z-10" data-tags="python machine-learning nlp">
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Analisi del Sentiment</h3>
+                            <p class="text-brand-black/70 text-sm mb-6 leading-relaxed">
+                                Progetto NLP per analizzare il sentimento delle recensioni degli utenti estratti da un e-commerce, utilizzando tecniche di tokenizzazione e reti neurali di base.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">NLP</span>
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">NLTK</span>
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Machine Learning</span>
                             </div>
                         </div>
-                        <div class="card-links">
-                            <a href="#" target="_blank" class="btn btn-secondary">Vedi Repository</a>
+                        <div class="flex flex-col sm:flex-row gap-3 mt-auto">
+                            <a href="#" class="w-full text-center border-2 border-brand-black text-brand-black font-medium py-2 rounded-lg text-sm hover:bg-brand-beige transition-colors">Vedi Repository</a>
                         </div>
-                    </div>
+                    </article>
+
+                    <!-- PROGETTO 4 (Esempio aggiuntivo) -->
+                    <article class="project-card bg-white rounded-2xl p-6 border-2 border-brand-beige flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage relative z-10" data-tags="webapp">
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Dashboard Dati Interattiva</h3>
+                            <p class="text-brand-black/70 text-sm mb-6 leading-relaxed">
+                                Sviluppo di una dashboard per la visualizzazione dei KPI aziendali. Interfaccia completamente responsiva con grafici dinamici basati su D3.js.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">JavaScript</span>
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">D3.js</span>
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">HTML/CSS</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3 mt-auto">
+                            <a href="#" class="flex-1 text-center bg-brand-black text-brand-bg font-medium py-2 rounded-lg text-sm hover:bg-brand-blue transition-colors">Vedi Live</a>
+                            <a href="#" class="flex-1 text-center border-2 border-brand-black text-brand-black font-medium py-2 rounded-lg text-sm hover:bg-brand-beige transition-colors">Sorgente</a>
+                        </div>
+                    </article>
 
                 </div>
             </section>
         </main>
 
         <!-- FOOTER -->
-        <footer>
-            <p>© 2026 Tommaso Manganiello - Realizzato con HTML, CSS & JS</p>
+        <footer class="mt-20 pt-8 border-t-2 border-brand-beige/50 text-center">
+            <p class="text-brand-dark font-medium text-sm">
+                © 2026 Tommaso Manganiello - Creato con cura.
+            </p>
         </footer>
     </div>
 
-    <!-- SCRIPT PER IL FILTRAGGIO DEI PROGETTI -->
+    <!-- SCRIPT PER IL FILTRAGGIO -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const filterBtns = document.querySelectorAll('.filter-btn');
-            const projectCards = document.querySelectorAll('.card');
+            const projectCards = document.querySelectorAll('.project-card');
 
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Rimuove la classe attiva da tutti i bottoni e la aggiunge a quello cliccato
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
+                    // 1. Gestione classi attive sui bottoni (Stile Tailwind)
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-brand-blue', 'text-brand-bg');
+                        b.classList.add('text-brand-blue', 'hover:bg-brand-blue/10');
+                    });
+                    
+                    btn.classList.add('active', 'bg-brand-blue', 'text-brand-bg');
+                    btn.classList.remove('text-brand-blue', 'hover:bg-brand-blue/10');
 
+                    // 2. Logica di filtraggio delle card
                     const filterValue = btn.getAttribute('data-filter');
 
-                    // Mostra o nasconde i progetti in base al tag
                     projectCards.forEach(card => {
                         const tags = card.getAttribute('data-tags');
+                        
                         if (filterValue === 'all' || tags.includes(filterValue)) {
-                            card.classList.remove('hidden');
+                            // Mostra la card rimuovendo la classe custom 'hidden-card'
+                            card.classList.remove('hidden-card');
                         } else {
-                            card.classList.add('hidden');
+                            // Nascondi la card
+                            card.classList.add('hidden-card');
                         }
                     });
                 });
