@@ -100,11 +100,12 @@
                 
                 <!-- FILTRI PROGETTI -->
                 <div class="flex overflow-x-auto no-scrollbar justify-start md:justify-center gap-3 mb-12 pb-2">
-                    <button class="filter-btn active px-5 py-2 rounded-full border-2 border-brand-blue font-semibold text-sm transition-all duration-300 bg-brand-blue text-brand-bg whitespace-nowrap" data-filter="all">Tutti</button>
+                    <button class="filter-btn active px-5 py-2 rounded-full border-2 border-brand-blue font-semibold text-sm transition-all duration-300 bg-brand-blue text-brand-bg whitespace-nowrap" data-filter="all">All</button>
                     <button class="filter-btn px-5 py-2 rounded-full border-2 border-brand-blue text-brand-blue font-semibold text-sm transition-all duration-300 hover:bg-brand-blue/10 whitespace-nowrap" data-filter="python">Python</button>
                     <button class="filter-btn px-5 py-2 rounded-full border-2 border-brand-blue text-brand-blue font-semibold text-sm transition-all duration-300 hover:bg-brand-blue/10 whitespace-nowrap" data-filter="machine-learning">Machine Learning</button>
                     <button class="filter-btn px-5 py-2 rounded-full border-2 border-brand-blue text-brand-blue font-semibold text-sm transition-all duration-300 hover:bg-brand-blue/10 whitespace-nowrap" data-filter="webapp">Web App</button>
                     <button class="filter-btn px-5 py-2 rounded-full border-2 border-brand-blue text-brand-blue font-semibold text-sm transition-all duration-300 hover:bg-brand-blue/10 whitespace-nowrap" data-filter="nlp">NLP</button>
+                    <button class="filter-btn px-5 py-2 rounded-full border-2 border-brand-blue text-brand-blue font-semibold text-sm transition-all duration-300 hover:bg-brand-blue/10 whitespace-nowrap" data-filter="html">Html</button>
                 </div>
 
                 <!-- GRIGLIA PROGETTI -->
@@ -113,77 +114,22 @@
                     <!-- PROGETTO 1 -->
                     <article class="project-card bg-white rounded-2xl p-6 border-2 border-brand-beige flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage relative z-10" data-tags="python webapp">
                         <div class="flex-grow">
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">Analisi Esplorativa & Web App</h3>
+                            <h3 class="text-xl font-bold text-brand-dark mb-3">Investment comparator</h3>
                             <p class="text-brand-black/70 text-sm mb-6 leading-relaxed">
-                                Web app interattiva creata per esplorare un dataset di prova e mostrare le metriche principali in tempo reale, permettendo all'utente di filtrare dinamicamente i parametri.
+                                Wep is an interactive app created for comparing different investment assets.
                             </p>
                             <div class="flex flex-wrap gap-2 mb-8">
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Python</span>
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Streamlit</span>
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Pandas</span>
+                                
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Web App</span>
+                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Html</span>
                             </div>
                         </div>
                         <div class="flex flex-col sm:flex-row gap-3 mt-auto">
-                            <a href="#" class="flex-1 text-center bg-brand-black text-brand-bg font-medium py-2 rounded-lg text-sm hover:bg-brand-blue transition-colors">Apri App</a>
-                            <a href="#" class="flex-1 text-center border-2 border-brand-black text-brand-black font-medium py-2 rounded-lg text-sm hover:bg-brand-beige transition-colors">Codice GitHub</a>
+                            <a href="https://tmanganiello-code.github.io/confronto_investimenti/" class="flex-1 text-center bg-brand-black text-brand-bg font-medium py-2 rounded-lg text-sm hover:bg-brand-blue transition-colors">Web App</a>
+                            <a href="https://github.com/tmanganiello-code/confronto_investimenti/blob/main/index.html" class="flex-1 text-center border-2 border-brand-black text-brand-black font-medium py-2 rounded-lg text-sm hover:bg-brand-beige transition-colors">GitHub Code</a>
                         </div>
                     </article>
-
-                    <!-- PROGETTO 2 -->
-                    <article class="project-card bg-white rounded-2xl p-6 border-2 border-brand-beige flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage relative z-10" data-tags="python machine-learning">
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">Modello Predittivo ML</h3>
-                            <p class="text-brand-black/70 text-sm mb-6 leading-relaxed">
-                                Analisi di classificazione per la predizione dei dati di churn aziendale tramite algoritmi Random Forest e Regressione Logistica, ottimizzando gli iperparametri.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-8">
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Python</span>
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Scikit-Learn</span>
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">EDA</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:flex-row gap-3 mt-auto">
-                            <a href="#" class="w-full text-center border-2 border-brand-black text-brand-black font-medium py-2 rounded-lg text-sm hover:bg-brand-beige transition-colors">Vedi Repository</a>
-                        </div>
-                    </article>
-
-                    <!-- PROGETTO 3 -->
-                    <article class="project-card bg-white rounded-2xl p-6 border-2 border-brand-beige flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage relative z-10" data-tags="python machine-learning nlp">
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">Analisi del Sentiment</h3>
-                            <p class="text-brand-black/70 text-sm mb-6 leading-relaxed">
-                                Progetto NLP per analizzare il sentimento delle recensioni degli utenti estratti da un e-commerce, utilizzando tecniche di tokenizzazione e reti neurali di base.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-8">
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">NLP</span>
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">NLTK</span>
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">Machine Learning</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:flex-row gap-3 mt-auto">
-                            <a href="#" class="w-full text-center border-2 border-brand-black text-brand-black font-medium py-2 rounded-lg text-sm hover:bg-brand-beige transition-colors">Vedi Repository</a>
-                        </div>
-                    </article>
-
-                    <!-- PROGETTO 4 (Esempio aggiuntivo) -->
-                    <article class="project-card bg-white rounded-2xl p-6 border-2 border-brand-beige flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage relative z-10" data-tags="webapp">
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-bold text-brand-dark mb-3">Dashboard Dati Interattiva</h3>
-                            <p class="text-brand-black/70 text-sm mb-6 leading-relaxed">
-                                Sviluppo di una dashboard per la visualizzazione dei KPI aziendali. Interfaccia completamente responsiva con grafici dinamici basati su D3.js.
-                            </p>
-                            <div class="flex flex-wrap gap-2 mb-8">
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">JavaScript</span>
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">D3.js</span>
-                                <span class="bg-brand-sage text-white text-xs font-semibold px-2.5 py-1 rounded-md shadow-sm">HTML/CSS</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:flex-row gap-3 mt-auto">
-                            <a href="#" class="flex-1 text-center bg-brand-black text-brand-bg font-medium py-2 rounded-lg text-sm hover:bg-brand-blue transition-colors">Vedi Live</a>
-                            <a href="#" class="flex-1 text-center border-2 border-brand-black text-brand-black font-medium py-2 rounded-lg text-sm hover:bg-brand-beige transition-colors">Sorgente</a>
-                        </div>
-                    </article>
-
+<!-- NON CANCELLARE -->
                 </div>
             </section>
         </main>
